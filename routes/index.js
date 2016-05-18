@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   connection.on('connect', function(err) {
     // If no error, then good to proceed.
     console.log("Connected");
-    res.render('index' , {title : execute()});
+    res.writeHead('index' , {title : execute()});
   });
 
 });
