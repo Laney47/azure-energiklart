@@ -46,7 +46,7 @@ app.use(function(req, res, next){
   connection.on('connect', function(err) {
     // If no error, then good to proceed.
     console.log("Connected");
-    res.render(executeStatement());
+    res.send(executeStatement());
   });
 });
 
