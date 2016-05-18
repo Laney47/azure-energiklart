@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   connection.on('connect', function(err) {
     // If no error, then good to proceed.
     console.log("Connected");
-    execute(res.render());
+    execute(res);
   });
 });
 module.exports = router;
