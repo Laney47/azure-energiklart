@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 module.exports = router;
 
-
+var Request = require('tedious').Request;
 function execute(){
 
 
