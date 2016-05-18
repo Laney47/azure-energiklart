@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
     // If no error, then good to proceed.
 
-    res.writeHead('index' , {title : app.execute() });
+    res.writeHead('index' , {title : 'Alibaba' });
 
 
 });
