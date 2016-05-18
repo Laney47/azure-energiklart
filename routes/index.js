@@ -14,17 +14,18 @@ var connection = new Connection(config);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-      res.render('index' , {title : execute()})
+  connection.on('connect', function(err) {
+    // If no error, then good to proceed.
+    console.log("Connected");
+    res.render('index' , {title : execute()});
+  });
+
 });
 module.exports = router;
 
 
 function execute(){
-  connection.on('connect', function(err) {
-    // If no error, then good to proceed.
-    console.log("Connected");
 
-  });
 
   request = new Request("SELECT userName FROM [venovu_com].[user]", function (err) {
     if (err) {
@@ -40,7 +41,7 @@ function execute(){
         }
       });
       console.log(result);
-      
+
     });
 
   connection.execSql(request);
