@@ -9,34 +9,41 @@ var config= {
   options: {encrypt: true, database: 'Energiklart'}
 };
 var connection = new Connection(config);
-var obj = {};
+
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  connection.on('connect', function(err) {
-    // If no error, then good to proceed.
-    console.log("Connected");
-    execute(res);
-  });
+      res.render('index' , {title : execute()})
 });
 module.exports = router;
 
 
-function execute(res){
-
-
-  request = new Request("SELECT userName FROM [venovu_com].[user]", function (err, results) {
-    if (err) {
-      throw err;
-    } else {
-
-      res.render('index', {title : 'tjena'});
-
-    }
-    console.log(obj);
+function execute(){
+  connection.on('connect', function(err) {
+    // If no error, then good to proceed.
+    console.log("Connected");
 
   });
+
+  request = new Request("SELECT userName FROM [venovu_com].[user]", function (err) {
+    if (err) {
+      console.log(err);}
+  });
+  var result = "";
+    request.on('row', function(columns) {
+      columns.forEach(function(column) {
+        if (column.value === null) {
+          console.log('NULL');
+        } else {
+          result+= column.value + " ";
+        }
+      });
+      console.log(result);
+      result ="";
+    });
+
   connection.execSql(request);
+  return result;
 }
 
