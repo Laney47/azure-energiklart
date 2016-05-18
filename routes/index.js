@@ -8,11 +8,12 @@ var config= {
   // When you connect to Azure SQL Database, you need these next options.
   options: {encrypt: true, database: 'Energiklart'}
 };
-var connection = new Connection(config);
-var obj = {};
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var connection = new Connection(config);
+  var obj = {};
 
   connection.query("SELECT userName FROM [venovu_com].[user]", function (err, results) {
     if (err) {
