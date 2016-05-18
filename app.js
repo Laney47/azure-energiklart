@@ -70,12 +70,12 @@ var connection = new Connection(config);
 connection.on('connect', function(err) {
   // If no error, then good to proceed.
   console.log("Connected");
-  execute();
+  executeStatement();
 });
 
 var Request = require('tedious').Request;
 
-function execute(){
+function executeStatement(){
 
 
   request = new Request("SELECT userName FROM [venovu_com].[user]", function (err) {
