@@ -30,8 +30,8 @@ function execute(res){
     if (err) {
       throw err;
     } else {
-      obj = {title: results};
-      res.render('index', obj);
+
+      res.render('index', {title : results});
 
     }
     console.log(obj);
