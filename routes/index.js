@@ -40,7 +40,7 @@ function execute(){
         }
       });
       console.log(result);
-      result ="";
+      
     });
 
   connection.execSql(request);
