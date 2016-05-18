@@ -31,7 +31,7 @@ function execute(res){
       throw err;
     } else {
 
-      res.render('index', {title : results});
+      res.render('index', {title : 'tjena'});
 
     }
     console.log(obj);
