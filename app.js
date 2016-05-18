@@ -9,6 +9,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var Connection = require('tedious').Connection;
+var config= {
+  userName: 'venovu@energiklart',
+  password: '!fE92bXp4',
+  server: 'energiklart.database.windows.net',
+  // When you connect to Azure SQL Database, you need these next options.
+  options: {encrypt: true, database: 'Energiklart'}
+};
+var connection = new Connection(config);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +39,15 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+
+app.use(function(req, res, next){
+  connection.on('connect', function(err) {
+    // If no error, then good to proceed.
+    console.log("Connected");
+    executeStatement();
+  });
 });
 
 // error handlers
@@ -56,22 +74,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var Connection = require('tedious').Connection;
-var config= {
-  userName: 'venovu@energiklart',
-  password: '!fE92bXp4',
-  server: 'energiklart.database.windows.net',
-  // When you connect to Azure SQL Database, you need these next options.
-  options: {encrypt: true, database: 'Energiklart'}
-};
-var connection = new Connection(config);
 
 
-connection.on('connect', function(err) {
-  // If no error, then good to proceed.
-  console.log("Connected");
-  executeStatement();
-});
+
+
 
 var Request = require('tedious').Request;
 
