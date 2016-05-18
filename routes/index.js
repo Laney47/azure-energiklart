@@ -8,14 +8,25 @@ var config= {
   // When you connect to Azure SQL Database, you need these next options.
   options: {encrypt: true, database: 'Energiklart'}
 };
+var connection = new Connection(config);
+var obj = {};
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var connection = new Connection(config);
-  var obj = {};
+  connection.on('connect', function(err) {
+    // If no error, then good to proceed.
+    console.log("Connected");
+    execute(res.render());
+  });
+});
+module.exports = router;
 
-  connection.query("SELECT userName FROM [venovu_com].[user]", function (err, results) {
+
+function execute(res){
+
+
+  request = new Request("SELECT userName FROM [venovu_com].[user]", function (err, results) {
     if (err) {
       throw err;
     } else {
@@ -23,8 +34,9 @@ router.get('/', function(req, res, next) {
       res.render('index', obj);
 
     }
-
+    console.log(obj);
 
   });
-});
-module.exports = router;
+  connection.execSql(request);
+}
+
