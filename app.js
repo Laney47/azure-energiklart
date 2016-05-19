@@ -103,13 +103,16 @@ function executeStatement(){
 
 router.get('/', function(req, res, next) {
 
-  connection.on('connect', function(err) {
-    // If no error, then good to proceed.
-    console.log("Connected");
-    res.render(executeStatement());
-  });
 
+  res.render('index' , {title: "Hej"});
 
 });
+
+connection.on('connect', function(err) {
+  // If no error, then good to proceed.
+  console.log("Connected");
+  executeStatement();
+});
+
 module.exports = router;
 module.exports = app;
